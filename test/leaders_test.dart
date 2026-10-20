@@ -86,21 +86,13 @@ void main() {
           .where((path) => !File(path).existsSync())
           .toList();
 
-      if (missingPortraits.isNotEmpty) {
-        print('\n===== MISSING LEADER PORTRAITS =====');
-
-        for (final path in missingPortraits) {
-          print('MISSING: $path');
-        }
-
-        print('===== END MISSING PORTRAITS =====\n');
-      }
-
       expect(
         missingPortraits,
         isEmpty,
-        reason: 'The following leader portrait files are missing:\n'
-            '${missingPortraits.join('\n')}',
+        reason: missingPortraits.isEmpty
+            ? null
+            : 'Missing leader portrait files:\n'
+                '${missingPortraits.join('\n')}',
       );
     });
 
